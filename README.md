@@ -27,7 +27,7 @@ classDiagram
         + void CadastrarHospedes(List~Pessoa~ pessoas)
         + void CadastrarSuite(Suite suite)
         + int ObterQuantidadeHospedes()
-        + decimal CalcularValorHospedagem()
+        + decimal CalcularValorEstadia()
     }
 
     Reserva "1" --> "*" Pessoa : contém >

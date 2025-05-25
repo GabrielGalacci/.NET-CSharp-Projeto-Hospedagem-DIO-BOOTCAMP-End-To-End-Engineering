@@ -18,12 +18,43 @@ namespace ProjetoHospedagem.Models
             DiasReservados = diasReservados;
         }
 
-        public void CadastrarHospedes(List<Pessoa> pessoas) { }
+        public void CadastrarHospedes(List<Pessoa> hospedes)
+        {
+            Hospedes = hospedes;
 
-        public void CadastrarSuite(Suite suite) { }
+            if (Hospedes.Count <= Suite.Capacidade)
+            {
+                Console.WriteLine($"Hospedes Cadastrados na Suíte {Suite.TipoSuite.ToUpper()}");
+                foreach (Pessoa hospede in Hospedes)
+                {
+                    Console.WriteLine($"Hóspede: {hospede.NomeCompleto.ToUpper()}");
+                }
+            }
+            else
+            {
+                throw new Exception("Número de Hospedes acima da capacidade da Suíte!");
+            }
+        }
 
-        public int ObterQuantidadeDeHospedes() { return 0; }
-        
-        public decimal CalcularValorHospedagem(){ return 1; }
+        public void CadastrarSuite(Suite suite)
+        {
+            Suite = suite;
+        }
+
+        public int ObterQuantidadeDeHospedes()
+        {
+            return Hospedes.Count;
+        }
+
+        public decimal CalcularValorEstadia()
+        {
+            decimal valorHospedagem = Suite.ValorDiaria * DiasReservados;
+
+            if (DiasReservados >= 10)
+            {
+                valorHospedagem *= 0.9M;
+            }
+            return valorHospedagem;
+        }
     }
 }
